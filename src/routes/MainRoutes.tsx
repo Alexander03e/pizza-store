@@ -6,8 +6,8 @@ import { Error } from "../pages/Error";
 export const MainRoutes = () => {
   return (
     <Routes>
-      <Route path="cart" element={<Cart />} />
-      <Route path="home" element={<Home />} />
+      <Route path="/cart" element={<Cart />} />
+      <Route path="/home" element={<Home />} />
       <Route path="*" element={<Error />} />
     </Routes>
   );

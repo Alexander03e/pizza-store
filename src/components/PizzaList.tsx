@@ -4,12 +4,20 @@ import { PizzaItemSkeleton } from "./PizzaItem/Skeleton";
 import React from "react";
 import axios from "axios";
 import { useAppSelector } from "../store/hooks";
+import { Pagination } from "./Pagination/Pagination";
+import ReactPaginate from "react-paginate";
 
 interface IPizzaListProps {
-  items: IPizza[];
+  page: number;
+  limitPages: number;
+  limitPerPage: number;
 }
 
-export const PizzaList: React.FC = () => {
+export const PizzaList: React.FC<IPizzaListProps> = ({
+  page,
+  limitPages,
+  limitPerPage,
+}) => {
   const [pizzas, setPizzas] = React.useState<IPizza[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
@@ -19,10 +27,17 @@ export const PizzaList: React.FC = () => {
   const getAllPizzas = async () => {
     try {
       await axios
+        // .get(
+        //   `https://65b2cba49bfb12f6eafe6e08.mockapi.io/items?${
+        //     categoryId !== 0 ? `category=${categoryId}&` : ""
+        //   }limit=${limitPerPage}&page=${page}&sortBy=${
+        //     sort.sortProperty
+        //   }&order=asc`
+        // )
         .get(
           `https://65b2cba49bfb12f6eafe6e08.mockapi.io/items?${
             categoryId !== 0 ? `category=${categoryId}&` : ""
-          }sortBy=${sort.sortProperty}&order=asc`
+          }&sortBy=${sort.sortProperty}&order=asc`
         )
         .then((res) => (setPizzas(res.data), setIsLoading(false)));
       // .then(() => isLoading(false));
@@ -36,7 +51,7 @@ export const PizzaList: React.FC = () => {
   React.useEffect(() => {
     setIsLoading(true);
     getAllPizzas();
-  }, [categoryId, sort]);
+  }, [categoryId, sort, page]);
 
   return (
     <>
@@ -46,7 +61,7 @@ export const PizzaList: React.FC = () => {
               .fill(null)
               .map((_, i) => <PizzaItemSkeleton key={i} />),
           ]
-        : pizzas.map((item) => <PizzaBlock item={item} key={item.id} />)}
+        : pizzas.map((item) => <PizzaBlock item={item} key={item.id}/>)}
     </>
   );
 };

@@ -1,13 +1,13 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { setCategoryId } from "../store/slices/filterSlice";
+import { setCategoryId } from "../store/slices/filter";
 
 export const Categories: React.FC = () => {
   const categories = [
     "Все",
     "Мясные",
     "Вегетарианская",
-    "Гриль", 
+    "Гриль",
     "Острые",
     "Закрытые",
   ];

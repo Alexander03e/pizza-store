@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  gap: 2em;
+}
+.wrapper button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.wrapper button:disabled {
+  cursor: auto;
+}
+.wrapper button:disabled h2 {
+  opacity: 0.5;
+}/*# sourceMappingURL=Pagination.module.css.map */

@@ -1,6 +1,9 @@
 import { NavLink } from "react-router-dom";
 import { Search } from "./Search";
+import { useAppSelector } from "../store/hooks";
 export const Header = () => {
+  const { items, totalPrice } = useAppSelector((state) => state.cart);
+
   return (
     <header className="header">
       <div className="container">
@@ -20,7 +23,7 @@ export const Header = () => {
         <Search />
         <div className="header__cart">
           <NavLink to="/cart" className="button button--cart">
-            <span>520 ₽</span>
+            <span>{totalPrice} ₽</span>
             <div className="button__delimiter"></div>
             <svg
               width="18"
@@ -51,7 +54,7 @@ export const Header = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            <span>3</span>
+            <span>{items.reduce((sum, val) => (sum += val.count), 0)}</span>
           </NavLink>
         </div>
       </div>

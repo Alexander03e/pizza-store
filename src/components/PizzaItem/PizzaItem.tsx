@@ -1,17 +1,43 @@
 import { useState } from "react";
 import { IPizza } from "../../App";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { IPizzaCart, addItem } from "../../store/slices/cart";
 
 interface IPizzaItemProps {
   item: IPizza;
 }
 
 export const PizzaBlock: React.FC<IPizzaItemProps> = ({ item }) => {
-  const [pizzaCount, setPizzaCount] = useState(0);
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
-  const pizzaTypes: any = {
+  const pizzaTypes: Record<number, string> = {
     0: "тонкое",
     1: "традиционное",
+  };
+
+  const { items } = useAppSelector((state) => state.cart);
+  const foundItem = items.find(
+    (obj) =>
+      obj.id === item.id &&
+      obj.type === pizzaTypes[activeType] &&
+      obj.size === activeSize
+  );
+  const dispatch = useAppDispatch();
+
+  const addPizzaToCart = () => {
+    const cartItem: IPizzaCart = {
+      id: item.id,
+      title: item.title,
+      price: item.price,
+      category: item.category,
+      imageUrl: item.imageUrl,
+      rating: item.rating,
+      size: activeSize,
+      type: pizzaTypes[activeType],
+      count: 0,
+    };
+    console.log(items.filter((el) => item.id === el.id));
+    dispatch(addItem(cartItem));
   };
 
   return (
@@ -24,7 +50,13 @@ export const PizzaBlock: React.FC<IPizzaItemProps> = ({ item }) => {
             <li
               key={i}
               onClick={() => setActiveType(type)}
-              className={type === activeType ? "active" : ""}
+              className={
+                item.types.length != 1
+                  ? type === activeType
+                    ? "active"
+                    : ""
+                  : "active"
+              }
             >
               {pizzaTypes[type]}
             </li>
@@ -47,7 +79,7 @@ export const PizzaBlock: React.FC<IPizzaItemProps> = ({ item }) => {
           от {Math.round(item.price / 5) * 5} руб.
         </div>
         <div
-          onClick={() => setPizzaCount(pizzaCount + 1)}
+          onClick={addPizzaToCart}
           className="button button--outline button--add"
         >
           <svg
@@ -63,7 +95,7 @@ export const PizzaBlock: React.FC<IPizzaItemProps> = ({ item }) => {
             />
           </svg>
           <span>Добавить</span>
-          <i>{pizzaCount}</i>
+          <i>{foundItem ? foundItem.count : 0}</i>
         </div>
       </div>
     </div>

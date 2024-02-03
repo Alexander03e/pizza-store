@@ -2,10 +2,10 @@ import React from "react";
 
 export const Search: React.FC = () => {
   const [value, setValue] = React.useState("");
-  const inputRef = React.useRef();
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
-    inputRef.current.focus();
+    inputRef.current?.focus();
   }, []);
   const changeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value);

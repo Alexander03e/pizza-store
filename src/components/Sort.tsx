@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { setSort } from "../store/slices/filterSlice";
+import { setSort } from "../store/slices/filter";
 
 const sortList = [
   { name: "популярности", sortProperty: "rating" },
@@ -12,7 +12,7 @@ export const Sort: React.FC = () => {
   const [open, setOpen] = React.useState<boolean>(false);
   const dispatch = useAppDispatch();
   const sortState = useAppSelector((state) => state.filterReducer.sort);
-
+  const sortRef = React.useRef<HTMLDivElement>(null);
   const openModal = () => {
     setOpen(!open);
   };
@@ -20,9 +20,25 @@ export const Sort: React.FC = () => {
     dispatch(setSort(item));
     setOpen(!open);
   };
+
+  React.useEffect(() => {
+    const handleClickOutside = (e: any) => {
+      if (sortRef.current && !e.composedPath().includes(sortRef.current)) {
+        setOpen(false);
+        console.log("outside");
+      }
+    };
+
+    document.body.addEventListener("click", handleClickOutside);
+    // handleClickOutside();
+    return () => {
+      document.body.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
-      <div className="sort">
+      <div ref={sortRef} className="sort">
         <div className="sort__label">
           <svg
             style={{
@@ -46,8 +62,9 @@ export const Sort: React.FC = () => {
         {open && (
           <div className="sort__popup">
             <ul>
-              {sortList.map((item) => (
+              {sortList.map((item, i) => (
                 <li
+                  key={i}
                   className={sortState.name === item.name ? "active" : ""}
                   onClick={() => changeSort(item)}
                 >

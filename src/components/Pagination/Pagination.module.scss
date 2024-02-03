@@ -1,0 +1,16 @@
+.wrapper{
+  display: flex;
+  gap: 2em;
+  button{
+    border:none;
+    background-color: transparent;
+    cursor: pointer;
+    // filter: brightness(0%);
+    &:disabled {
+      cursor:auto;
+      h2{ 
+        opacity: 0.5;
+      }
+    }
+  }
+}
