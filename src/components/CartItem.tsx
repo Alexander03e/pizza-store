@@ -7,7 +7,7 @@ import {
   clearCart,
   removeItem,
   removeOneItem,
-} from "../store/slices/cart";
+} from "../store/slices/cart/slice";
 
 interface IPizzaItemProps {
   item: IPizzaCart;

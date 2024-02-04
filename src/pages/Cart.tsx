@@ -1,6 +1,6 @@
 import { CartItem } from "../components/CartItem";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { clearCart, removeItem } from "../store/slices/cart";
+import { clearCart, removeItem } from "../store/slices/cart/slice";
 
 export const Cart: React.FC = () => {
   const dispatch = useAppDispatch();

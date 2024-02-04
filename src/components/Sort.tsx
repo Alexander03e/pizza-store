@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { setSort } from "../store/slices/filter";
+import { setSort } from "../store/slices/filter/slice";
 
 const sortList = [
   { name: "популярности", sortProperty: "rating" },

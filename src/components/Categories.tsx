@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { setCategoryId } from "../store/slices/filter";
+import { setCategoryId } from "../store/slices/filter/slice";
 
 export const Categories: React.FC = () => {
   const categories = [

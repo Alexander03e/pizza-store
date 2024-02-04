@@ -1,6 +1,5 @@
 import React from "react";
 import { Categories } from "../components/Categories";
-import { Pagination } from "../components/Pagination/Pagination";
 import { PizzaList } from "../components/PizzaList";
 import { Sort } from "../components/Sort";
 

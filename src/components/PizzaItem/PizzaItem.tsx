@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IPizza } from "../../App";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { IPizzaCart, addItem } from "../../store/slices/cart";
+import { IPizzaCart, addItem } from "../../store/slices/cart/slice";
 
 interface IPizzaItemProps {
   item: IPizza;
