@@ -39,7 +39,7 @@ const cartSlice = createSlice({
     clearCart(state) {
       state.items = []
       
-      state.totalPrice = state.items.reduce((sum, val) =>  val.price*val.count + sum, 0)
+      state.totalPrice = 0
     },
     removeOneItem(state, action: PayloadAction<IPizzaCart>) {
       const findPizza = state.items.find(item => item.id === action.payload.id && item.type === action.payload.type && item.size === action.payload.size)

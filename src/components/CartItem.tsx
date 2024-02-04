@@ -2,9 +2,7 @@ import { useAppDispatch } from "../store/hooks";
 // import { IPizza } from "../App";
 import {
   IPizzaCart,
-  addItem,
   addOneItem,
-  clearCart,
   removeItem,
   removeOneItem,
 } from "../store/slices/cart/slice";
@@ -14,6 +12,7 @@ interface IPizzaItemProps {
 }
 
 export const CartItem: React.FC<IPizzaItemProps> = ({ item }) => {
+  const pizzaSizes = [26, 30, 40];
   const dispatch = useAppDispatch();
 
   const removeItemFromCart = (el: IPizzaCart) => {
@@ -38,7 +37,9 @@ export const CartItem: React.FC<IPizzaItemProps> = ({ item }) => {
         </div>
         <div className="cart__item-info">
           <h3>{item.title}</h3>
-          <p>{item.type} тесто, 26 см.</p>
+          <p>
+            {item.type} тесто, {pizzaSizes[item.size]} см.
+          </p>
         </div>
         <div className="cart__item-count">
           <div

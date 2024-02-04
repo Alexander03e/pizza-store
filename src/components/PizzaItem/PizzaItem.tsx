@@ -46,7 +46,7 @@ export const PizzaBlock: React.FC<IPizzaItemProps> = ({ item }) => {
       <h4 className="pizza-block__title">{item.title}</h4>
       <div className="pizza-block__selector">
         <ul>
-          {item.types.map((type, i) => (
+          {item.types?.map((type, i) => (
             <li
               key={i}
               onClick={() => setActiveType(type)}
@@ -63,7 +63,7 @@ export const PizzaBlock: React.FC<IPizzaItemProps> = ({ item }) => {
           ))}
         </ul>
         <ul>
-          {item.sizes.map((size, i) => (
+          {item.sizes?.map((size, i) => (
             <li
               onClick={() => setActiveSize(i)}
               className={activeSize === i ? "active" : ""}
@@ -75,9 +75,7 @@ export const PizzaBlock: React.FC<IPizzaItemProps> = ({ item }) => {
         </ul>
       </div>
       <div className="pizza-block__bottom">
-        <div className="pizza-block__price">
-          от {Math.round(item.price / 5) * 5} руб.
-        </div>
+        <div className="pizza-block__price">от {item.price} руб.</div>
         <div
           onClick={addPizzaToCart}
           className="button button--outline button--add"

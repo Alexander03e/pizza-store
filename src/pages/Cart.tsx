@@ -1,7 +1,7 @@
 import { CartItem } from "../components/CartItem";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { clearCart, removeItem } from "../store/slices/cart/slice";
-
+import emptyCart from "../assets/img/empty-cart.png";
 export const Cart: React.FC = () => {
   const dispatch = useAppDispatch();
   const { items, totalPrice } = useAppSelector((state) => state.cart);
@@ -11,6 +11,7 @@ export const Cart: React.FC = () => {
   };
 
   const pizzaCount = items.reduce((sum, val) => val.count + sum, 0);
+
   return (
     <>
       <div className="container container--cart">
@@ -89,7 +90,7 @@ export const Cart: React.FC = () => {
               <span onClick={clearCartClick}>Очистить корзину</span>
             </div>
           </div>
-          <div className="C--ITEMS">
+          <div className="cart__pizza-items">
             {items.map((item) => (
               <CartItem item={item} />
             ))}

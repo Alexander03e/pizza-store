@@ -31,6 +31,7 @@ const pizzaSlice = createSlice({
         state.status = Status.LOADING;
       });
     builder.addCase(fetchPizza.rejected, (state) => {
+      console.log("error");
       state.status = Status.ERROR;
     });
   },

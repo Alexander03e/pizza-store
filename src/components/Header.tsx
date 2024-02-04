@@ -7,19 +7,19 @@ export const Header = () => {
   return (
     <header className="header">
       <div className="container">
-        <div className="header__logo">
-          <NavLink to="/home">
+        <NavLink to="/home">
+          <div className="header__logo">
             <img
               width="38"
               src="src/assets/img/pizza-logo.svg"
               alt="Pizza logo"
             />
-          </NavLink>
-          <div>
-            <h1>React Pizza</h1>
-            <p>самая вкусная пицца во вселенной</p>
+            <div>
+              <h1>React Pizza</h1>
+              <p>самая вкусная пицца во вселенной</p>
+            </div>
           </div>
-        </div>
+        </NavLink>
         <Search />
         <div className="header__cart">
           <NavLink to="/cart" className="button button--cart">
